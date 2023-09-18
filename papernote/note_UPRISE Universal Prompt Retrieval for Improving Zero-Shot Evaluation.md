@@ -5,7 +5,7 @@
 
 文章的“universal”，指的是两个方面的“普适的”，一是指跨任务，即检索器在一些任务上训练，之后在另一些未见过的任务上检索可用prompt，性能依旧达到要求；二是指跨平台，即检索器在一个较小的模型的“监督”下训练，之后应用在大模型的任务上。具体可见下图：
 
-![](../resources/note_pictures/UPRISE Universal Prompt Retrieval for Improving Zero-Shot Evaluation/1.png)
+<div align=center>![](../resources/note_pictures/UPRISE Universal Prompt Retrieval for Improving Zero-Shot Evaluation/1.png)
 
 ### 问题定义
 给定了一个问题输入$x$，我们需要在一个已定义好的prompt池$P$中检索出一组正面的prompt$P^+$，即：
