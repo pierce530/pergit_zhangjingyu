@@ -1,11 +1,21 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 # UPRISE: Universal Prompt Retrieval for Improving Zero-Shot Evaluation
 
-## 工作原理
+## 内容介绍
 这篇也是微软研究院发的文章，在23年3月份挂上arxiv，主要探究了训练一个普适的prompt检索器，适用于zero-shot learning，另一篇文章*Learning to Retrieve In-Context Examples for Large Language Models*可以认为是在这篇文章的基础上做出创新，使本篇文章的工作原理可以被使用在few-shot learning（in-context learning）上。
 
 文章的“universal”，指的是两个方面的“普适的”，一是指跨任务，即检索器在一些任务上训练，之后在另一些未见过的任务上检索可用prompt，性能依旧达到要求；二是指跨平台，即检索器在一个较小的模型的“监督”下训练，之后应用在大模型的任务上。具体可见下图：
 
-![](../resources/note_pictures/UPRISE Universal Prompt Retrieval for Improving Zero-Shot Evaluation/1.png)
+![](../resources/note_pictures/UPRISE%20Universal%20Prompt%20Retrieval%20for%20Improving%20Zero-Shot%20Evaluation/1.png)
 
 这里的”监督“，指的是需要一个模型来评断选择的prompt的优劣，给定输入问题与prompt，通过模型的输出结果计算prompt的评分。
 
@@ -26,7 +36,7 @@ $$
 #### 数据构建
 1. 关于任务数据：这篇文章研究的是zero-shot下的prompt检索，所以prompt一般都是任务描述（例如，“根据我提供给你的电影梗概，告诉我这部电影的类型“或”根据人物对话，判断对话是积极还是消极的“等），如下图。本文根据FLAN的方法，将数据集数据转换为自然语言的指导作为prompt，每个数据集使用了七种不同的template，每条数据随机使用其中的一种template，组成prompt。
 
-   ![](../resources/note_pictures/UPRISE Universal Prompt Retrieval for Improving Zero-Shot Evaluation/3.png)
+   ![](../resources/note_pictures/UPRISE%20Universal%20Prompt%20Retrieval%20for%20Improving%20Zero-Shot%20Evaluation/3.png)
 
 2. 关于promp池：对于每一个数据集群（一个或多个类似的数据集转换成的任务数据），它的prompt池就是其他数据集群，这些数据集群由其他任务的数据集转化组成。这与in-context learning的思路类似，即使测试任务与训练任务的任务类型完全不同，测试输入仍能得益于类似的话题、提问方式、思考步骤等；这里必须使用其他数据集群，原因就是所谓的”普适性“的第一条，跨任务有效性。
 
@@ -68,4 +78,5 @@ prompt编码器微调好后，将整个prompt池都编码（之前指抽了一�
 还有证据表明该检索器可以减轻chat-GPT的幻觉问题。
 
 一些检索器的训练细节：
-![](../resources/note_pictures/UPRISE Universal Prompt Retrieval for Improving Zero-Shot Evaluation/2.png)
+
+![](../resources/note_pictures/UPRISE%20Universal%20Prompt%20Retrieval%20for%20Improving%20Zero-Shot%20Evaluation/2.png)
